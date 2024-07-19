@@ -10,4 +10,9 @@ typedef struct {
     char *content;
 } VaultLog_t;
 
+typedef struct {
+    char *id;
+    char *summary;
+} IndexSummary_t;
+
 #endif // COMMON_H
