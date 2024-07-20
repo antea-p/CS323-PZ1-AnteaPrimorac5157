@@ -13,8 +13,8 @@ typedef struct {
 } VaultLog_t;
 
 typedef struct {
-    char *id;
-    char *summary;
+    char id[MAX_ID_LENGTH];
+    char summary[SUMMARY_LENGTH + 1];
 } IndexSummary_t;
 
 #endif // COMMON_H
