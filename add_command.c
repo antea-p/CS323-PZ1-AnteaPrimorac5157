@@ -6,8 +6,7 @@
 int add_vault_log(const char *content) {
     FILE *p_index_file;
     int next_id = 0;
-    // duzina pojedinacne linije, 3 proizlazi od || i \n
-    char line[MAX_ID_LENGTH + SUMMARY_LENGTH + 3];
+    char line[LINE_SIZE];
     p_index_file = fopen(INDEX_FILE, "r");
 
     if (p_index_file != NULL) {
