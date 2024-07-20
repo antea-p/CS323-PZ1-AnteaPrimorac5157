@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <string.h>
-#include <stdlib.h>
 #include "add_command.h"
 #include "list_command.h"
+#include "view_command.h"
+#include "delete_command.h"
 
 int main(int argc, char *argv[]) {
     if (argc < 2) {
@@ -15,20 +16,34 @@ int main(int argc, char *argv[]) {
         return 1;
     }
     // TODO: implementirati robusnije upravljanje greskama
-    if (strcmp(argv[1], "list") == 0 && argc == 2) {
-        list_vault_logs();
+    char *command = argv[1];
+    if (strcmp(command, "list") == 0 && argc == 2) {
+        return list_vault_logs();
+
     }
-    else if (strcmp(argv[1], "add") == 0) {
+    else if (strcmp(command, "view") == 0) {
         if (argc == 3) {
-            add_vault_log(argv[2]);
-            return 0;
+            //return view_vault_log(argv[2]);
+        }
+        else {
+            printf("You need to provide ID!");
+        }
+    }
+    else if (strcmp(command, "add") == 0) {
+        if (argc == 3) {
+            return add_vault_log(argv[2]);
         }
         else {
             printf("You need to provide text content!");
             return 1;
         }
+    } else if (strcmp(command, "delete") == 0) {
+        if (argc == 3) {
+            return delete_vault_log(argv[2]);
+        } else {
+            printf("You need to provide ID!");
+        }
     }
-
     printf("Unknown command: %s\n", argv[1]);
     return 1;
 
