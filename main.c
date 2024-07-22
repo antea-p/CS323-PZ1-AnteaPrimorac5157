@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "add_command.h"
 #include "list_command.h"
 #include "view_command.h"
@@ -23,7 +24,7 @@ int main(int argc, char *argv[]) {
     }
     else if (strcmp(command, "view") == 0) {
         if (argc == 3) {
-            //return view_vault_log(argv[2]);
+            return view_vault_log(atoi(argv[2]));
         }
         else {
             printf("You need to provide ID!");

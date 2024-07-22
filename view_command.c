@@ -1,0 +1,62 @@
+#include <stdio.h>
+#include <malloc.h>
+#include <string.h>
+#include "common.h"
+#define CHUNK_SIZE 1024
+#define INITIAL_BUFFER (CHUNK_SIZE * 2)
+
+int view_vault_log(int id) {
+    // TODO: validacija ID-ja
+    FILE *p_file;
+    char *p_content;
+    size_t buffer_size, bytes_read, total_read;
+    char chunk[CHUNK_SIZE];
+
+    char filename[MAX_ID_LENGTH + 4];
+    snprintf(filename, sizeof(filename), "%d.txt", id);
+
+    p_file = fopen(filename, "r");
+
+    total_read = 0;
+    buffer_size = INITIAL_BUFFER;
+    p_content = malloc(buffer_size);
+    if (p_content == NULL) {
+        fprintf(stderr, "Error allocating the space for file contents\n");
+        return -1;
+    }
+
+    if (p_file != NULL) {
+        while ((bytes_read = fread(chunk, 1, CHUNK_SIZE, p_file)) > 0) {
+            // +1 proizlazi od null terminatora kojeg ce se dodati
+            if (total_read + bytes_read + 1 > buffer_size) {
+                buffer_size *= 2;
+                char *p_temp_content = realloc(p_content, buffer_size);
+                if (p_temp_content == NULL) {
+                    fprintf(stderr, "Memory reallocation failed\n");
+                    free(p_content);
+                    fclose(p_file);
+                    return 1;
+                }
+                p_content = p_temp_content;
+            }
+
+            memcpy(p_content + total_read, chunk, bytes_read);
+            total_read += bytes_read;
+        }
+        fclose(p_file);
+    }
+
+    else {
+        fprintf(stderr, "Couldn't open the file %d.txt!\n", id);
+        free(p_content);
+        return 1;
+    }
+
+    // Dodaje se jer memcpy to ne radi automatski
+    p_content[total_read] = '\0';
+
+    printf("%s\n", p_content);
+
+    free (p_content);
+    return 0;
+}
