@@ -10,7 +10,7 @@ int edit_vault_log(const char *id, const char *new_content) {
     }
 
     char *filename = prepare_filename(id);
-    FILE *p_file = fopen(filename, "w");
+    FILE *p_file = fopen(filename, "r+");
     if (p_file == NULL) {
         fprintf(stderr, "Couldn't open file %s for editing\n", filename);
         return 1;
@@ -45,6 +45,6 @@ int edit_vault_log(const char *id, const char *new_content) {
     remove(INDEX_FILE);
     rename(TEMP_FILE, INDEX_FILE);
 
-    printf("Edited vault log %s successfully\n", id);
+    printf("Edited vault log %s.txt successfully\n", id);
     return 0;
 }
