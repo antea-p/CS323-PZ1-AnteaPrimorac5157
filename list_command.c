@@ -45,9 +45,16 @@ int list_vault_logs() {
 
 
     for (size_t i = 0; i < size; ++i) {
-        printf("ID: %s | Summary: %s...\n",
-               p_vault_logs_summaries[i].id,
-               p_vault_logs_summaries[i].summary);
+        if (strlen(p_vault_logs_summaries[i].summary) < SUMMARY_LENGTH) {
+            printf("ID: %s | Summary: %s\n",
+                   p_vault_logs_summaries[i].id,
+                   p_vault_logs_summaries[i].summary);
+        }
+        else {
+            printf("ID: %s | Summary: %s...\n",
+                   p_vault_logs_summaries[i].id,
+                   p_vault_logs_summaries[i].summary);
+        }
     }
     free(p_vault_logs_summaries);
     return 0;
