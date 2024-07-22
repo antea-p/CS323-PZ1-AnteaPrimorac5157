@@ -4,10 +4,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAX_ID_LENGTH 16
+// maks duzina ID-ja 10 cifara - dovoljno za najveci int
+#define MAX_ID_LENGTH 10
 #define SUMMARY_LENGTH 48
 // duzina pojedinacne linije, 6 proizlazi od ||, ... i \n
 #define LINE_SIZE (MAX_ID_LENGTH + SUMMARY_LENGTH + 6)
+#define FILENAME_MAX_LENGTH (MAX_ID_LENGTH + 4)  // +4 zbog ".txt"
 #define INDEX_FILE "index.txt"
 #define TEMP_FILE "temp.txt"
 
@@ -17,6 +19,7 @@ typedef struct {
 } IndexSummary_t;
 
 FILE *check_file(FILE *file, const char *filename);
-int is_valid_id(int id);
+int is_valid_id(const char *id);
+char *prepare_filename(const char *id);
 
 #endif // COMMON_H
