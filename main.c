@@ -11,7 +11,8 @@ Command_t commands_array[] = {
     {"view",   parse_view_command,   "Read the full contents of the chosen vault log"},
     {"add",    parse_add_command,    "Add a new vault log"},
     {"delete", parse_delete_command, "Delete the chosen vault log"},
-    {NULL, NULL, NULL}
+    {"edit", parse_edit_command, "Edit an existing vault log"},
+    {NULL, NULL, NULL} // sentinel vrijednost
 };
 
 int main(int argc, char *argv[]) {

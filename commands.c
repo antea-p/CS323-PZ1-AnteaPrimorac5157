@@ -3,6 +3,7 @@
 #include "view_command.h"
 #include "add_command.h"
 #include "delete_command.h"
+#include "edit_command.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -24,6 +25,14 @@ int parse_add_command(int argc, char *argv[]) {
         return 1;
     }
     return add_vault_log(argv[2]);
+}
+
+int parse_edit_command(int argc, char *argv[]) {
+    if (argc != 4) {
+        fprintf(stderr, "Usage: vaultmgr edit <id> <new_text>\n");
+        return 1;
+    }
+    return edit_vault_log(argv[2], argv[3]);
 }
 
 int parse_delete_command(int argc, char *argv[]) {
