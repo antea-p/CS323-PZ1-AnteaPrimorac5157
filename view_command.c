@@ -25,7 +25,7 @@ int view_vault_log(const char *id) {
     p_content = malloc(buffer_size);
     if (p_content == NULL) {
         fprintf(stderr, "Error allocating the space for file contents\n");
-        return -1;
+        return 1;
     }
 
     if (p_file != NULL) {

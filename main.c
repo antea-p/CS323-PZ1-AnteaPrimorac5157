@@ -24,7 +24,11 @@ int main(int argc, char *argv[]) {
 
     for (int i = 0; commands_array[i].name != NULL; i++) {
         if (strcmp(argv[1], commands_array[i].name) == 0) {
-            return commands_array[i].function(argc, argv);
+            int result = commands_array[i].function(argc, argv);
+            if (result != 0) {
+                print_usage(commands_array);
+            }
+            return result;
         }
     }
 

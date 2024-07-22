@@ -27,10 +27,9 @@ int add_vault_log(const char *content) {
     char *filename = prepare_filename(id_str);
 
     FILE *p_log_file = fopen(filename, "w");
-    // TODO: refaktorirati
     if (p_log_file == NULL) {
         fprintf(stderr, "Couldn't create file for vault log!");
-        return -1;
+        return 1;
     }
 
     fputs(content, p_log_file);
@@ -39,7 +38,7 @@ int add_vault_log(const char *content) {
     p_index_file = fopen(INDEX_FILE, "a");
     if (p_index_file == NULL) {
         fprintf(stderr, "Couldn't open index file!");
-        return -1;
+        return 1;
     }
 
     // Zapisi <redni_broj>, zatim || (separator), pa `<sazetak sadrzaja>...`, i konacno novu liniju.
