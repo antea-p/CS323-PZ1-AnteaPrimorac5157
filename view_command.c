@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <malloc.h>
 #include <string.h>
 #include "common.h"
 #define CHUNK_SIZE 1024
@@ -19,6 +18,10 @@ int view_vault_log(const char *id) {
     char *filename = prepare_filename(id);
 
     p_file = fopen(filename, "r");
+    if (p_file == NULL) {
+        fprintf(stderr, "The file %s.txt doesn't exist!\n", id);
+        return 1;
+    }
 
     total_read = 0;
     buffer_size = INITIAL_BUFFER;
@@ -28,32 +31,24 @@ int view_vault_log(const char *id) {
         return 1;
     }
 
-    if (p_file != NULL) {
-        while ((bytes_read = fread(chunk, 1, CHUNK_SIZE, p_file)) > 0) {
-            // +1 proizlazi od null terminatora kojeg ce se dodati
-            if (total_read + bytes_read + 1 > buffer_size) {
-                buffer_size *= 2;
-                char *p_temp_content = realloc(p_content, buffer_size);
-                if (p_temp_content == NULL) {
-                    fprintf(stderr, "Memory reallocation failed\n");
-                    free(p_content);
-                    fclose(p_file);
-                    return 1;
-                }
-                p_content = p_temp_content;
+    while ((bytes_read = fread(chunk, 1, CHUNK_SIZE, p_file)) > 0) {
+        // +1 proizlazi od null terminatora kojeg ce se dodati
+        if (total_read + bytes_read + 1 > buffer_size) {
+            buffer_size *= 2;
+            char *p_temp_content = realloc(p_content, buffer_size);
+            if (p_temp_content == NULL) {
+                fprintf(stderr, "Memory reallocation failed\n");
+                free(p_content);
+                fclose(p_file);
+                return 1;
             }
-
-            memcpy(p_content + total_read, chunk, bytes_read);
-            total_read += bytes_read;
+            p_content = p_temp_content;
         }
-        fclose(p_file);
-    }
 
-    else {
-        fprintf(stderr, "Couldn't open the file %d.txt!\n", id);
-        free(p_content);
-        return 1;
+        memcpy(p_content + total_read, chunk, bytes_read);
+        total_read += bytes_read;
     }
+    fclose(p_file);
 
     // Dodaje se jer memcpy to ne radi automatski
     p_content[total_read] = '\0';
