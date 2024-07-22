@@ -21,9 +21,10 @@ int add_vault_log(const char *content) {
 
     next_id++;
 
-    // Pripremi datoteku naziva <id>.txt i zapisi ju u buffer
-    char filename[MAX_ID_LENGTH + 4];
-    snprintf(filename, sizeof(filename), "%d.txt", next_id);
+    // Pripremi datoteku naziva <id>.txt (gdje +1 dodajemo zbog null terminatora), i zapisi ju u buffer
+    char id_str[MAX_ID_LENGTH + 1];
+    snprintf(id_str, sizeof(id_str), "%d", next_id);
+    char *filename = prepare_filename(id_str);
 
     FILE *p_log_file = fopen(filename, "w");
     // TODO: refaktorirati

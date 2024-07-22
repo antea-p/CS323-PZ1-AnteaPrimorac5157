@@ -15,7 +15,7 @@ int parse_view_command(int argc, char *argv[]) {
         fprintf(stderr, "Usage: vaultmgr view <id>\n");
         return 1;
     }
-    return view_vault_log(atoi(argv[2]));
+    return view_vault_log(argv[2]);
 }
 
 int parse_add_command(int argc, char *argv[]) {

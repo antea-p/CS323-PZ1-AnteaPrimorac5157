@@ -4,6 +4,6 @@
 #include <stddef.h>
 #include "common.h"
 
-int view_vault_log(int id);
+int view_vault_log(const char *id);
 
 #endif //VIEW_COMMAND_H

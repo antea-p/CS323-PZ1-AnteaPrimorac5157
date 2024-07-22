@@ -5,15 +5,18 @@
 #define CHUNK_SIZE 1024
 #define INITIAL_BUFFER (CHUNK_SIZE * 2)
 
-int view_vault_log(int id) {
-    // TODO: validacija ID-ja
+int view_vault_log(const char *id) {
+    if (!is_valid_id(id)) {
+        fprintf(stderr, "Invalid ID!\n");
+        return 1;
+    }
+
     FILE *p_file;
     char *p_content;
     size_t buffer_size, bytes_read, total_read;
     char chunk[CHUNK_SIZE];
 
-    char filename[MAX_ID_LENGTH + 4];
-    snprintf(filename, sizeof(filename), "%d.txt", id);
+    char *filename = prepare_filename(id);
 
     p_file = fopen(filename, "r");
 

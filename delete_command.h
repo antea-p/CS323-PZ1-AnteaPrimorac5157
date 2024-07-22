@@ -3,7 +3,6 @@
 #define TEMP_FILE "temp.txt"
 #include "common.h"
 
-
-int delete_vault_log(char *id);
+int delete_vault_log(const char *id);
 
 #endif // DELETE_COMMAND_H
