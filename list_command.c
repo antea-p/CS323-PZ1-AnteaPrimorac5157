@@ -18,6 +18,11 @@ int list_vault_logs() {
     }
 
     p_index_file = fopen(INDEX_FILE, "r");
+    if (p_index_file == NULL) {
+        p_index_file = fopen(INDEX_FILE, "w");
+        printf("Your index.txt is empty! Try adding something to it!");
+    }
+
     if (p_index_file != NULL) {
         while (fgets(line, sizeof(line), p_index_file) != NULL) {
             if (size >= capacity) {
@@ -38,7 +43,7 @@ int list_vault_logs() {
         fclose(p_index_file);
     }
     else {
-        fprintf(stderr, "Index.txt doesn't exist!\n");
+        fprintf(stderr, "Couldn't open Index.txt!\n");
         free(p_vault_logs_summaries);
         return 1;
     }

@@ -23,8 +23,12 @@ int edit_vault_log(const char *id, const char *new_content) {
     FILE *p_temp_file = fopen(TEMP_FILE, "w");
     if (p_index_file == NULL || p_temp_file == NULL) {
         fprintf(stderr, "Error opening index or temporary file\n");
-        if (p_index_file) fclose(p_index_file);
-        if (p_temp_file) fclose(p_temp_file);
+        if (p_index_file) {
+            fclose(p_index_file);
+        }
+        if (p_temp_file) {
+            fclose(p_temp_file);
+        }
         return 1;
     }
 
