@@ -10,15 +10,30 @@ int edit_vault_log(const char *id, const char *new_content) {
     }
 
     char *filename = prepare_filename(id);
-    FILE *p_file = fopen(filename, "r+");
+
+    // Provjera postojanja datoteke
+    FILE *p_file = fopen(filename, "r");
+    if (p_file == NULL) {
+        fprintf(stderr, "File %s does not exist\n", filename);
+        return 1;
+    }
+    fclose(p_file);
+
+    // Datoteka postoji, ponovno ju otvori ali ovog puta za pisanje
+    p_file = fopen(filename, "w");
     if (p_file == NULL) {
         fprintf(stderr, "Couldn't open file %s for editing\n", filename);
         return 1;
     }
 
-    fputs(new_content, p_file);
+    if (fputs(new_content, p_file) == EOF) {
+        fprintf(stderr, "Error writing to file %s\n", filename);
+        fclose(p_file);
+        return 1;
+    }
     fclose(p_file);
 
+    // Azuriraj index.txt, upotrebom privremene datoteke
     FILE *p_index_file = fopen(INDEX_FILE, "r");
     FILE *p_temp_file = fopen(TEMP_FILE, "w");
     if (p_index_file == NULL || p_temp_file == NULL) {
