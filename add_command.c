@@ -4,6 +4,11 @@
 #include "header/common.h"
 
 int add_vault_log(const char *content) {
+    if (is_whitespace_only(content)) {
+        fprintf(stderr, "The contents of file must contain at least one non-whitespace character!\n");
+        return 1;
+    }
+
     FILE *p_index_file;
     int next_id = 0;
     char line[LINE_SIZE];

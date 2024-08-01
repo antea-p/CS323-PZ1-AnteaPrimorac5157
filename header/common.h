@@ -21,5 +21,6 @@ typedef struct {
 FILE *check_file(FILE *file, const char *filename);
 int is_valid_id(const char *id);
 char *prepare_filename(const char *id);
+int is_whitespace_only(const char *str);
 
 #endif // COMMON_H

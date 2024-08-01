@@ -34,3 +34,13 @@ char *prepare_filename(const char *id) {
     snprintf(filename, sizeof(filename), "%s.txt", id);
     return filename;
 }
+
+int is_whitespace_only(const char *str) {
+    while (*str) {
+        if (!isspace((unsigned char) *str)) {
+            return 0;
+        }
+        str++;
+    }
+    return 1;
+}

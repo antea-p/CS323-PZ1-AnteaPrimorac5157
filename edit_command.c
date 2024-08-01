@@ -9,6 +9,11 @@ int edit_vault_log(const char *id, const char *new_content) {
         return 1;
     }
 
+    if (is_whitespace_only(new_content)) {
+        fprintf(stderr, "Can't replace old file with blank content!\n");
+        return 1;
+    }
+
     char *filename = prepare_filename(id);
 
     // Provjera postojanja datoteke
