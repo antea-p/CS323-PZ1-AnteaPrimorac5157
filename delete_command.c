@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "delete_command.h"
+#include "header/delete_command.h"
 
 int delete_vault_log(const char *id) {
     if (!is_valid_id(id)) {

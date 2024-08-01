@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <string.h>
-#include "common.h"
+#include "header/common.h"
 #define CHUNK_SIZE 1024
 #define INITIAL_BUFFER (CHUNK_SIZE * 2)
 

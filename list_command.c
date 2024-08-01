@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "common.h"
-#include "list_command.h"
+#include "header/common.h"
+#include "header/list_command.h"
 #define INITIAL_CAPACITY 10
 
 int list_vault_logs() {

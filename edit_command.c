@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "edit_command.h"
-#include "common.h"
+#include "header/edit_command.h"
+#include "header/common.h"
 
 int edit_vault_log(const char *id, const char *new_content) {
     if (!is_valid_id(id)) {

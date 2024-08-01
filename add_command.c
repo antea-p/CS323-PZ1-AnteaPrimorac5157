@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "add_command.h"
-#include "common.h"
+#include "header/add_command.h"
+#include "header/common.h"
 
 int add_vault_log(const char *content) {
     FILE *p_index_file;

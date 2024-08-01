@@ -1,4 +1,4 @@
-#include "common.h"
+#include "header/common.h"
 #include <stdio.h>
 #include <limits.h>
 #include <ctype.h>

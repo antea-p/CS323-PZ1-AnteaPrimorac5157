@@ -1,9 +1,9 @@
-#include "commands.h"
-#include "list_command.h"
-#include "view_command.h"
-#include "add_command.h"
-#include "delete_command.h"
-#include "edit_command.h"
+#include "header/commands.h"
+#include "header/list_command.h"
+#include "header/view_command.h"
+#include "header/add_command.h"
+#include "header/delete_command.h"
+#include "header/edit_command.h"
 #include <stdio.h>
 #include <stdlib.h>
 

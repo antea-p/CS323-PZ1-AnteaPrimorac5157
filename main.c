@@ -1,7 +1,7 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <string.h>
-#include "commands.h"
+#include "header/commands.h"
 
 void print_usage(const Command_t *commands_array);
 void print_banner(const char *text);
